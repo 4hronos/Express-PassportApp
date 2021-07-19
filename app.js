@@ -3,11 +3,13 @@ const ExpressHandlebars = require("express-handlebars");
 const flash = require("connect-flash");
 const session = require("express-session");
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const app = express();
 // public
 app.use(express.static("public"));
 const passport = require("passport");
-
 
 // engine
 app.engine(
@@ -18,20 +20,19 @@ app.engine(
 );
 app.set("view engine", ".hbs");
 
-
 // utility middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+var time = 360000;
+
 app.use(
   session({
     name: "yoxlayan",
-    secret: "thisIsOurLittleSecret",
+    secret: process.env.COOKIE_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: {
-      maxAge: new Date(Date.now()+ 0.1 * 3600000)
-    }
+    expires: new Date(Date.now() + time),
   })
 );
 

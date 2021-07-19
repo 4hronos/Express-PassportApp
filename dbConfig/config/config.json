@@ -7,7 +7,7 @@
     "dialect": "mysql"
   },
   "test": {
-    "use_env_variable": true,
+    "use_env_variable": "CLEARDB_DATABASE_URL",
     "username": "root",
     "password": null,
     "database": "database_test",
